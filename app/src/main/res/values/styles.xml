@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AddNewCocktailFab" parent="Widget.MaterialComponents.FloatingActionButton" />
+
+    <style name="AddPictureButtonStyle" parent="Widget.Material3.Button.IconButton.Filled" />
+
+    <style name="CustomOutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="boxStrokeColor">@color/dark_grey</item>
+    </style>
+
+
+    <style name="SaveButton" parent="@style/Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/blue</item>
+    </style>
+
+    <style name="DetailsBodyText">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:fontFamily">@font/didact_gothic</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/default_text</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/body_text_size</item>
+
+    </style>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/cocktailsFragment">
+    <fragment
+        android:id="@+id/cocktailsFragment"
+        android:name="com.example.mycocktailebar.presentation.cocktails.CocktailsFragment"
+        android:label="fragment_cocktails"
+        tools:layout="@layout/fragment_cocktails" >
+        <action
+            android:id="@+id/action_cocktailsFragment_to_creationFragment"
+            app:destination="@id/creationFragment" />
+        <action
+            android:id="@+id/action_cocktailsFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/creationFragment"
+        android:name="com.example.mycocktailebar.presentation.creation.CreationFragment"
+        android:label="fragment_creation"
+        tools:layout="@layout/fragment_creation" >
+        <action
+            android:id="@+id/action_creationFragment_to_cocktailsFragment"
+            app:destination="@id/cocktailsFragment"
+            app:popUpTo="@id/cocktailsFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_creationFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:popUpTo="@id/detailsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.mycocktailebar.presentation.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_detailsFragment_to_cocktailsFragment"
+            app:destination="@id/cocktailsFragment"
+            app:popUpTo="@id/cocktailsFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="cocktail"
+            app:argType="com.example.mycocktailbar.domain.models.Cocktail" />
+        <action
+            android:id="@+id/action_detailsFragment_to_creationFragment"
+            app:destination="@id/creationFragment" />
+    </fragment>
+</navigation>
