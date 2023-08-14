@@ -5,7 +5,9 @@ import com.example.mycocktailebar.di.dataModule
 import com.example.mycocktailebar.di.domainModule
 import com.example.mycocktailebar.di.presentationModule
 import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.GlobalContext.startKoin
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 class App: Application() {
 
@@ -14,6 +16,7 @@ class App: Application() {
 
         startKoin {
             androidContext(this@App)
+            androidLogger(Level.DEBUG)
             modules(listOf(dataModule, domainModule, presentationModule))
         }
     }

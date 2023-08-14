@@ -159,7 +159,6 @@
 
         <Button
             android:id="@+id/button_save"
-            style="@style/Widget.Material3.Button.IconButton.Filled"
             android:layout_width="match_parent"
             android:layout_height="@dimen/long_buttons_height"
             android:layout_marginHorizontal="16dp"
@@ -173,7 +172,6 @@
 
         <Button
             android:id="@+id/button_cancel"
-            style="@style/SaveButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/long_buttons_height"
             android:layout_marginHorizontal="16dp"

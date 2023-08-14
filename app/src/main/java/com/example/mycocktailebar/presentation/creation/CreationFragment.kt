@@ -2,24 +2,25 @@ package com.example.mycocktailebar.presentation.creation
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.mycocktailebar.R
 import com.example.mycocktailebar.databinding.FragmentCreationBinding
 import com.example.mycocktailebar.domain.models.Cocktail
 import com.google.android.material.textfield.TextInputEditText
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreationFragment : Fragment() {
 
     private var _binding: FragmentCreationBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: CreationViewModel
+    private val viewModel: CreationViewModel by viewModel()
     private var cocktailId = -1
     private lateinit var cocktail: Cocktail
 

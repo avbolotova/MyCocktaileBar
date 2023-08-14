@@ -1,21 +1,22 @@
 package com.example.mycocktailebar.presentation.cocktails
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.mycocktailebar.databinding.FragmentCocktailsBinding
 import com.example.mycocktailebar.domain.models.Cocktail
 import com.example.mycocktailebar.presentation.cocktails.adapters.CocktailsAdapter
 import com.example.mycocktailebar.presentation.cocktails.models.ScreenState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CocktailsFragment : Fragment() {
 
     private var _binding: FragmentCocktailsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: CocktailsViewModel
+    private val viewModel: CocktailsViewModel by viewModel()
     private lateinit var cocktailsAdapter: CocktailsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

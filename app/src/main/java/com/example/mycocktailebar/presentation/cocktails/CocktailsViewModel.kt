@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mycocktailebar.domain.models.Cocktail
+import com.example.mycocktailebar.domain.storage.AddNewCocktailUseCase
 import com.example.mycocktailebar.domain.storage.GetAllCocktailsUseCase
 import com.example.mycocktailebar.presentation.cocktails.models.ScreenState
 import kotlinx.coroutines.launch

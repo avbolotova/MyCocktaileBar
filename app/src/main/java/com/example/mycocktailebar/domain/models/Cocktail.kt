@@ -1,7 +1,7 @@
-package com.example.mycocktailebar.domain
+package com.example.mycocktailebar.domain.models
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Cocktail(
