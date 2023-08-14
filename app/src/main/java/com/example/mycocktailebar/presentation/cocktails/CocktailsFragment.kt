@@ -85,7 +85,7 @@ class CocktailsFragment : Fragment() {
             noContentLayout.visibility = View.GONE
             contentLayout.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
-            errorLayout.visibility = View.GONE
+
         }
     }
 
@@ -94,7 +94,7 @@ class CocktailsFragment : Fragment() {
             noContentLayout.visibility = View.GONE
             contentLayout.visibility = View.GONE
             progressBar.visibility = View.VISIBLE
-            errorLayout.visibility = View.GONE
+
         }
     }
 
@@ -103,7 +103,7 @@ class CocktailsFragment : Fragment() {
             noContentLayout.visibility = View.VISIBLE
             contentLayout.visibility = View.GONE
             progressBar.visibility = View.GONE
-            errorLayout.visibility = View.GONE
+
         }
     }
 
@@ -112,7 +112,7 @@ class CocktailsFragment : Fragment() {
             noContentLayout.visibility = View.GONE
             contentLayout.visibility = View.GONE
             progressBar.visibility = View.GONE
-            errorLayout.visibility = View.VISIBLE
+
         }
     }
 
