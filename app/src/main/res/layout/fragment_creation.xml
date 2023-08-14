@@ -168,6 +168,7 @@
             android:fontFamily="@font/didact_gothic"
             android:gravity="center"
             android:text="@string/save"
+            android:textColor="@color/white"
             android:textSize="24sp" />
 
         <Button
@@ -177,6 +178,8 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
+            android:background="@drawable/small_button_blue"
+            android:textColor="@color/blue"
             android:contentDescription="@string/add_picture"
             android:fontFamily="@font/didact_gothic"
             android:text="@string/cancel"

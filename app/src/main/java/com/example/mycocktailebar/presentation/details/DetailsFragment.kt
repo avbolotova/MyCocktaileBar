@@ -2,9 +2,7 @@ package com.example.mycocktailebar.presentation.details
 
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -13,6 +11,7 @@ import com.example.mycocktailebar.databinding.FragmentDetailsBinding
 import com.example.mycocktailebar.domain.models.Cocktail
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class DetailsFragment : Fragment() {
 
@@ -76,15 +75,20 @@ class DetailsFragment : Fragment() {
     }
 
     private fun showDeleteConfirmationDialog() {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.alert_dialog_title))
+        val dialogView = layoutInflater.inflate(R.layout.alert_dialog, null)
+
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
             .setMessage(getString(R.string.alert_dialog_message_delete))
-            .setCancelable(false)
-            .setNegativeButton(getString(R.string.answer_no)) { _, _ -> }
-            .setPositiveButton(getString(R.string.answer_yes)) { _, _ ->
-                deleteCocktail()
-            }
-            .show()
+            .setView(dialogView)
+            .setPositiveButton("Да") { _, _ -> deleteCocktail() }
+            .setNegativeButton("Отмена", null)
+            .create()
+
+        val dialogHeight = 10
+        dialog.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, dialogHeight)
+        dialog.window?.setGravity(Gravity.CENTER_VERTICAL)
+
+        dialog.show()
     }
 
     override fun onDestroyView() {
