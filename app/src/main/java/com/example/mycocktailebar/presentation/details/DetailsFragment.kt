@@ -15,8 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment : Fragment() {
 
-    private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var _binding: FragmentDetailsBinding
     private lateinit var cocktail: Cocktail
     private val viewModel: DetailsViewModel by viewModel()
 
@@ -32,9 +31,9 @@ class DetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailsBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,17 +41,17 @@ class DetailsFragment : Fragment() {
 
         bindViews()
 
-        binding.buttonEdit.setOnClickListener {
+        _binding.buttonEdit.setOnClickListener {
             val action =
                 DetailsFragmentDirections.actionDetailsFragmentToCreationFragment(cocktail.id)
             findNavController().navigate(action)
         }
 
-        binding.buttonDelete.setOnClickListener { showDeleteConfirmationDialog() }
+        _binding.buttonDelete.setOnClickListener { showDeleteConfirmationDialog() }
     }
 
     private fun bindViews() {
-        with(binding) {
+        with(_binding) {
 
             Glide.with(requireContext())
                 .load(R.drawable.mohito_image)
@@ -91,10 +90,6 @@ class DetailsFragment : Fragment() {
         dialog.show()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     companion object {
         const val COCKTAIL = "cocktail"

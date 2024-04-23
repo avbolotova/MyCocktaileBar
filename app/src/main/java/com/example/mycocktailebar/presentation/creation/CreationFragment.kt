@@ -18,8 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreationFragment : Fragment() {
 
-    private var _binding: FragmentCreationBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var _binding: FragmentCreationBinding
     private val viewModel: CreationViewModel by viewModel()
     private var cocktailId = -1
     private lateinit var cocktail: Cocktail
@@ -34,9 +33,9 @@ class CreationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCreationBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,42 +46,42 @@ class CreationFragment : Fragment() {
             viewModel.cocktail.observe(viewLifecycleOwner) {
                 bindViews(it)
             }
-            binding.buttonSave.setOnClickListener { saveCocktail(cocktailId) }
+            _binding.buttonSave.setOnClickListener { saveCocktail(cocktailId) }
 
         } else {
-            binding.buttonSave.setOnClickListener { saveCocktail(cocktailId) }
+            _binding.buttonSave.setOnClickListener { saveCocktail(cocktailId) }
         }
 
-        binding.buttonCancel.setOnClickListener { findNavController().navigateUp() }
+        _binding.buttonCancel.setOnClickListener { findNavController().navigateUp() }
 
-        clearErrorMessage(binding.editCocktailIngredients)
-        clearErrorMessage(binding.editCocktailName)
+        clearErrorMessage(_binding.editCocktailIngredients)
+        clearErrorMessage(_binding.editCocktailName)
 
     }
 
     private fun isInputValid(): Boolean {
         return viewModel.isInputIsValid(
-            name = binding.editCocktailName.text.toString(),
-            ingredients = binding.editCocktailIngredients.text.toString()
+            name = _binding.editCocktailName.text.toString(),
+            ingredients = _binding.editCocktailIngredients.text.toString()
         )
     }
 
     private fun hideKeyboard() {
         val inputMethodManager =
             activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(binding.scrollView.windowToken, 0)
+        inputMethodManager.hideSoftInputFromWindow(_binding.scrollView.windowToken, 0)
     }
 
     private fun showErrorMessage(view: TextInputEditText) {
 
         if (view.text?.isBlank() == true) {
             when (view) {
-                binding.editCocktailName -> binding.layoutCocktailName.error =
+                _binding.editCocktailName -> _binding.layoutCocktailName.error =
                     getString(R.string.add_title)
 
-                else -> binding.layoutCocktailIngredients.error = getString(R.string.add_title)
+                else -> _binding.layoutCocktailIngredients.error = getString(R.string.add_title)
             }
-            binding.scrollView.smoothScrollTo(0, 0)
+            _binding.scrollView.smoothScrollTo(0, 0)
             hideKeyboard()
         }
     }
@@ -92,8 +91,8 @@ class CreationFragment : Fragment() {
         view.addTextChangedListener {
             if (it?.isNotBlank() == true) {
                 when (view) {
-                    binding.editCocktailName -> binding.layoutCocktailName.error = null
-                    else -> binding.layoutCocktailIngredients.error = null
+                    _binding.editCocktailName -> _binding.layoutCocktailName.error = null
+                    else -> _binding.layoutCocktailIngredients.error = null
                 }
             }
         }
@@ -101,7 +100,7 @@ class CreationFragment : Fragment() {
 
     private fun bindViews(cocktail: Cocktail) {
 
-        binding.apply {
+        _binding.apply {
             editCocktailName.setText(cocktail.name, TextView.BufferType.SPANNABLE)
             editCocktailDescription.setText(cocktail.description, TextView.BufferType.SPANNABLE)
             editCocktailIngredients.setText(cocktail.ingredients, TextView.BufferType.SPANNABLE)
@@ -109,10 +108,6 @@ class CreationFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     companion object {
         const val ID = "id"
@@ -125,18 +120,18 @@ class CreationFragment : Fragment() {
             if (cocktailId > 0) {
                 viewModel.editCocktail(
                     id = cocktailId,
-                    name = binding.editCocktailName.text.toString(),
-                    description = binding.editCocktailDescription.text.toString(),
-                    ingredients = binding.editCocktailIngredients.text.toString(),
-                    recipe = binding.editCocktailRecipe.text.toString()
+                    name = _binding.editCocktailName.text.toString(),
+                    description = _binding.editCocktailDescription.text.toString(),
+                    ingredients = _binding.editCocktailIngredients.text.toString(),
+                    recipe = _binding.editCocktailRecipe.text.toString()
                 )
 
                 cocktail = Cocktail(
                     id = cocktailId,
-                    name = binding.editCocktailName.text.toString(),
-                    description = binding.editCocktailDescription.text.toString(),
-                    ingredients = binding.editCocktailIngredients.text.toString(),
-                    recipe = binding.editCocktailRecipe.text.toString(),
+                    name = _binding.editCocktailName.text.toString(),
+                    description = _binding.editCocktailDescription.text.toString(),
+                    ingredients = _binding.editCocktailIngredients.text.toString(),
+                    recipe = _binding.editCocktailRecipe.text.toString(),
                     imageSrc = 0
                 )
 
@@ -146,10 +141,10 @@ class CreationFragment : Fragment() {
 
             } else {
                 viewModel.addNewCocktail(
-                    name = binding.editCocktailName.text.toString(),
-                    description = binding.editCocktailDescription.text.toString(),
-                    ingredients = binding.editCocktailIngredients.text.toString(),
-                    recipe = binding.editCocktailRecipe.text.toString()
+                    name = _binding.editCocktailName.text.toString(),
+                    description = _binding.editCocktailDescription.text.toString(),
+                    ingredients = _binding.editCocktailIngredients.text.toString(),
+                    recipe = _binding.editCocktailRecipe.text.toString()
                 )
                 val action = CreationFragmentDirections.actionCreationFragmentToCocktailsFragment()
                 findNavController().navigate(action)
@@ -157,8 +152,8 @@ class CreationFragment : Fragment() {
 
 
         } else {
-            showErrorMessage(binding.editCocktailName)
-            showErrorMessage(binding.editCocktailIngredients)
+            showErrorMessage(_binding.editCocktailName)
+            showErrorMessage(_binding.editCocktailIngredients)
 
         }
 

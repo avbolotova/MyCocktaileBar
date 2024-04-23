@@ -14,8 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CocktailsFragment : Fragment() {
 
-    private var _binding: FragmentCocktailsBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var _binding: FragmentCocktailsBinding
     private val viewModel: CocktailsViewModel by viewModel()
     private lateinit var cocktailsAdapter: CocktailsAdapter
 
@@ -28,10 +27,10 @@ class CocktailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentCocktailsBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +54,7 @@ class CocktailsFragment : Fragment() {
             }
         }
 
-        binding.fabAdd.setOnClickListener {
+        _binding.fabAdd.setOnClickListener {
             val action = CocktailsFragmentDirections.actionCocktailsFragmentToCreationFragment()
             findNavController().navigate(action)
         }
@@ -76,12 +75,12 @@ class CocktailsFragment : Fragment() {
                 }
             })
 
-        binding.recyclerView.adapter = cocktailsAdapter
-        binding.recyclerView.setHasFixedSize(true)
+        _binding.recyclerView.adapter = cocktailsAdapter
+        _binding.recyclerView.setHasFixedSize(true)
     }
 
     private fun showContent() {
-        with(binding) {
+        with(_binding) {
             noContentLayout.visibility = View.GONE
             contentLayout.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
@@ -90,7 +89,7 @@ class CocktailsFragment : Fragment() {
     }
 
     private fun showLoading() {
-        with(binding) {
+        with(_binding) {
             noContentLayout.visibility = View.GONE
             contentLayout.visibility = View.GONE
             progressBar.visibility = View.VISIBLE
@@ -99,7 +98,7 @@ class CocktailsFragment : Fragment() {
     }
 
     private fun showEmptyScreen() {
-        with(binding) {
+        with(_binding) {
             noContentLayout.visibility = View.VISIBLE
             contentLayout.visibility = View.GONE
             progressBar.visibility = View.GONE
@@ -108,7 +107,7 @@ class CocktailsFragment : Fragment() {
     }
 
     private fun showError() {
-        with(binding) {
+        with(_binding) {
             noContentLayout.visibility = View.GONE
             contentLayout.visibility = View.GONE
             progressBar.visibility = View.GONE
@@ -116,8 +115,4 @@ class CocktailsFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
